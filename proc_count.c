@@ -24,7 +24,7 @@ static int proc_count(struct seq_file *m, void *v){
 static int __init proc_count_init(void)
 {
 	//here is our proc_dir_entry data structure
-	entry = proc_create_single("count", 0, NULL, proc_count);
+	entry = proc_create_single("count", 0644, NULL, proc_count);
 
 	//log kernel message with 'info' severity level
 	pr_info("proc_count: init\n");
