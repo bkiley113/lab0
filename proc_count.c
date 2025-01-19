@@ -13,7 +13,7 @@ static int proc_count(struct seq_file *m, void *v){
 	struct task_struct *task;
 
 	for_each_process(task){
-		count++
+		count++;
 	}
 
 	seq_printf(m, "Process count is %d\n", count);
