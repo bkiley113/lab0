@@ -23,10 +23,7 @@ static int proc_count(struct seq_file *m, void *v){
 
 static int __init proc_count_init(void)
 {
-	//here is our proc_dir_entry data structure
-	entry = proc_create_single("count", 0644, NULL, proc_count);
-
-	//log kernel message with 'info' severity level
+	entry = proc_create_single("count", 0, NULL, proc_count);
 	pr_info("proc_count: init\n");
 	return 0;
 }
@@ -40,6 +37,6 @@ static void __exit proc_count_exit(void)
 module_init(proc_count_init);
 module_exit(proc_count_exit);
 
-MODULE_AUTHOR("Your Name");
+MODULE_AUTHOR("Brandon Kiley");
 MODULE_DESCRIPTION("CS111 lab0 count proc number");
 MODULE_LICENSE("GPL");
