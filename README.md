@@ -1,6 +1,7 @@
 # A Kernel Seedling
-TODO: intro
-I modified the proc_count function in the given proc_count.c skeleton as follows:
+Simple kernel module that outputs an integer value corresponding to the number of processes running on a Linux machine.
+
+The proc_count.c file does the following:
 
 1. initialized a counter at zero, this updates every time a process is counted, called 'count'
 
