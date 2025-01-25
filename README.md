@@ -1,47 +1,49 @@
 # A Kernel Seedling
 TODO: intro
+I modified the proc_count function in the given proc_count.c skeleton as follows:
 
-### General Notes
-- we seek to write a kernel module (.ko), that is, a piece of code that can be dynamically added to/removed from the kernel while the system is running
+1. initialized a counter at zero, this updates every time a process is counted, called 'count'
 
-- we can extend the kernel's functionality without requiring a reboot or recompilation of the entire kernel
+2. intialized a task_struct pointer 'task.' I learned that this is a kernel data structure in Linux that represents a process.
 
-- 'loading' a module means dynamically inserting the module into the kernel's running memory, then the module's functionality becomes part of the kernel
+3. used the kernel macro for_each_process and passed the 'task' pointer to it to iterate through every running process. loop updates 'count' at every iteration
 
-- the module runs in kernel mode, with direct access to privileged operations
+4. used 'seq_prinf' to display the value of the counter to the terminal
 
-- command: `sudo insmod <module>.ko` loads a module
-- command: `sudo rmmod <module>.ko` unloads a module
-
-- when a module is loaded, `module_init` function is executed for setup
-- when unloaded, `module_exit` is executed to clean up resources
-
-- what I want to happen:
-    - when i run `make` -> `sudo insmod proc_count.ko` -> `cat /proc/count`
-    things should work as outlined in the lab
-
+5. return 0!
 
 ## Building
 ```shell
-TODO: cmd for build
+make
 ```
 
 ## Running
 ```shell
-TODO: cmd for running binary
+sudo insmod proc_count.ko
+cat /proc/count
 ```
-TODO: results?
+When I run 'cat /proc/count,' the shell outputs an integer value. 
+When I run it, I get numbers around the range of 78-81, corresponding to the number of processes.
 
 ## Cleaning Up
 ```shell
-TODO: cmd for cleaning the built binary
+sudo rmmod proc_count
+make clean
 ```
 
 ## Testing
 ```python
 python -m unittest
 ```
-TODO: results?
+When I run the above command, the following appears in the shell:
+```shell
+...
+--------------------------------------------
+Ran 3 tests in 12.845s
+
+OK
+```
+This means my kernel module passes all given tests.
 
 Report which kernel release version you tested your module on
 (hint: use `uname`, check for options with `man uname`).
@@ -50,4 +52,6 @@ It should match release numbers as seen on https://www.kernel.org/.
 ```shell
 uname -r -s -v
 ```
-TODO: kernel ver?
+When I run the uname command I get the following output:
+
+Linux 5.14.8-arch1-1 #1 SMP PREEMPT Sun, 26 Sep 2021 19:36:15 +0000
